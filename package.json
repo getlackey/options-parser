@@ -1,0 +1,28 @@
+{
+    "name": "lackey-options-parser",
+    "version": "0.0.1",
+    "description": "Options parser. Converts several formats into an options object",
+    "main": "lib/index.js",
+    "scripts": {
+        "test": "grunt test && mocha tests"
+    },
+    "author": "Enigma Marketing <admin@enigma-marketing.co.uk> (http://www.enigma-marketing.co.uk)",
+    "licenses": [{
+        "type": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/getlackey/options-parser.git"
+    },
+    "dependencies": {
+        "lackey-make-title": "0.0.x"
+    },
+    "devDependencies": {
+        "grunt": "^0.4.5",
+        "grunt-config-dir": "^0.3.2",
+        "grunt-contrib-watch": "^0.6.1",
+        "grunt-jslint": "^1.1.12",
+        "mocha": "^2.1.0"
+    }
+}
