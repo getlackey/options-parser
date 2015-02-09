@@ -22,7 +22,12 @@ If that string begins with '/' we will consider it a path to a file and require 
     var optionsParser = require('lackey-options-parser'),
         opts = optionsParser('/models/test/my-opts.json');
 
-This file is required from the process.cwd()
+This file is required from the process dir, where you run node.
+
+When running this module in the browser, using browserify, you need to make sure the json file is (pre)required:
+
+    options.require = ['./models/test/my-opts.json'];
+
 
 ### Array
 
