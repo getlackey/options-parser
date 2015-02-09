@@ -17,6 +17,13 @@ We are going to provide several formats an always get the same object in the out
     var optionsParser = require('lackey-options-parser'),
         opts = optionsParser('opt1 opt2 opt3:test_this');
 
+If that string begins with '/' we will consider it a path to a file and require it. 
+    
+    var optionsParser = require('lackey-options-parser'),
+        opts = optionsParser('/models/test/my-opts.json');
+
+This file is required from the process.cwd()
+
 ### Array
 
     var optionsParser = require('lackey-options-parser'),
