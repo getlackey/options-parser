@@ -23,6 +23,21 @@ var assert = require("assert"),
 describe('Options Parser', function () {
 
     describe('Create options object', function () {
+        it('should accept an object', function () {
+            var opts = optionsParser({
+                    "opt1": "Opt 1",
+                    "opt2": "Opt 2",
+                    "opt3": "Test this"
+                }),
+                expected = {
+                    "opt1": "Opt 1",
+                    "opt2": "Opt 2",
+                    "opt3": "Test this"
+                };
+
+            assert.deepEqual(opts, expected);
+        });
+
         it('should convert to object from String', function () {
             var opts = optionsParser('opt1 opt2 opt3:test_this'),
                 expected = {
@@ -43,6 +58,92 @@ describe('Options Parser', function () {
                 };
 
             assert.deepEqual(opts, expected);
+        });
+
+        it('should convert to object from Array', function () {
+            var expected = 'opt1 opt2 opt3:test_this',
+                opts = optionsParser('opt1 opt2 opt3:test_this'),
+                result = opts.toString();
+
+            assert.deepEqual(result, expected);
+        });
+
+        it('should convert get keys', function () {
+            var expected = ['opt1', 'opt2', 'opt3'],
+                opts = optionsParser('opt1 opt2 opt3:test_this'),
+                result = opts.getKeys();
+
+            assert.deepEqual(result, expected);
+        });
+
+        it('should convert get values', function () {
+            var expected = ['opt1', 'opt2', 'test_this'],
+                opts = optionsParser('opt1 opt2 opt3:test_this'),
+                result = opts.getValues();
+
+            assert.deepEqual(result, expected);
+        });
+
+        it('should convert get values with stripped underscores', function () {
+            var expected = ['opt1', 'opt2', 'test this'],
+                opts = optionsParser('opt1 opt2 opt3:test_this'),
+                result = opts.stripUnderscores().getValues();
+
+            assert.deepEqual(result, expected);
+        });
+
+        it('should convert make titles', function () {
+            var expected = {
+                    "opt1": "Opt 1",
+                    "opt2": "Opt 2",
+                    "opt3": "Test this"
+                },
+                opts = optionsParser('opt1 opt2 opt3:test_this'),
+                result = opts.stripUnderscores().makeTitle();
+
+            assert.deepEqual(result, expected);
+        });
+
+        it('should load a file', function () {
+            var expected = {
+                    "opt1": "Opt 1",
+                    "opt2": "Opt 2",
+                    "opt3": "Test this"
+                },
+                opts = optionsParser('/fixtures/options.json'),
+                result = opts;
+
+            assert.deepEqual(result, expected);
+        });
+
+        it('should convert ALL values to array', function () {
+            var expected = {
+                    "opt1": ["opt1"],
+                    "opt2": ["opt2"],
+                    "opt3": [
+                        "test_this",
+                        "test_that"
+                    ]
+                },
+                opts = optionsParser('opt1 opt2 opt3:test_this,test_that').makeArray(true),
+                result = opts;
+
+            assert.deepEqual(result, expected);
+        });
+
+        it('should convert the CSV values to array', function () {
+            var expected = {
+                    "opt1": "opt1",
+                    "opt2": "opt2",
+                    "opt3": [
+                        "test_this",
+                        "test_that"
+                    ]
+                },
+                opts = optionsParser('opt1 opt2 opt3:test_this,test_that').makeArray(false),
+                result = opts;
+
+            assert.deepEqual(result, expected);
         });
     });
 
