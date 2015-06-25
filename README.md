@@ -77,6 +77,22 @@ returns:
         opt3: "Test this"
     }
 
+### makeArray(convertAll)
+Converts CSV values to arrays. The convertAll option (default false) will either convert all items into arrays or just the ones containing a comma.
+
+    var opts = optionsParser('opt1 opt2 opt3:testThis,testThis').makeArray();
+
+returns:
+
+    {
+        opt1: "opt1",
+        opt2: "opt2",
+        opt3: [
+            "testThis",
+            "testThis"
+        ]
+    }
+
 ## getKeys
 Returns an array with the keys of an object
 
