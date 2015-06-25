@@ -9,7 +9,8 @@ module.exports = function (grunt) {
 
     // Register group tasks
     grunt.registerTask('test', [
-        'jslint'
+        'jslint',
+        'mocha_istanbul'
     ]);
 
     // keeps watching for file changes
