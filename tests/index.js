@@ -104,13 +104,57 @@ describe('Options Parser', function () {
             assert.deepEqual(result, expected);
         });
 
-        it('should load a file', function () {
+        it('should load a JSON file', function () {
             var expected = {
                     "opt1": "Opt 1",
                     "opt2": "Opt 2",
                     "opt3": "Test this"
                 },
                 opts = optionsParser('/fixtures/options.json'),
+                result = opts;
+
+            assert.deepEqual(result, expected);
+        });
+
+        it('should load a JS file and execute it', function() {
+             var expected = {},
+                opts = optionsParser('/fixtures/options.js'),
+                result = opts;
+
+            assert.deepEqual(result, expected);
+        });
+
+        it('should load a JS file and execute it with function', function() {
+             var expected = {
+                    "opt1": "Opt 1",
+                    "opt2": "Opt 2",
+                    "opt3": "Test this"
+                },
+                opts = optionsParser('/fixtures/options.js#options'),
+                result = opts;
+
+            assert.deepEqual(result, expected);
+        });
+
+        it('should load a JS file and execute it with function and options', function() {
+             var expected = {
+                    "opt1": "Opt 1",
+                    "opt2": "Opt 2",
+                    "opt3": "Test this"
+                },
+                opts = optionsParser('/fixtures/options.js#echo?opt1=Opt%201&opt2=Opt%202&opt3=Test%20this'),
+                result = opts;
+
+            assert.deepEqual(result, expected);
+        });
+
+        it('should load a JS file and execute it with options only', function() {
+             var expected = {
+                    "opt1": "Opt 1",
+                    "opt2": "Opt 2",
+                    "opt3": "Test this"
+                },
+                opts = optionsParser('/fixtures/options.js?opt1=Opt%201&opt2=Opt%202&opt3=Test%20this'),
                 result = opts;
 
             assert.deepEqual(result, expected);
