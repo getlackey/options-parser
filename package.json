@@ -1,6 +1,6 @@
 {
     "name": "lackey-options-parser",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Options parser. Converts several formats into an options object",
     "main": "lib/index.js",
     "scripts": {
